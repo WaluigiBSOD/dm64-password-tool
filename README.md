@@ -1,4 +1,4 @@
-# Dr. Mario 64 Password Encoder/Decoder
+# Dr. Mario 64 Password Encoder/Decoder Tool
 A command-line tool written in C++ that allows to encode and decode [the passwords of Dr. Mario 64](https://tcrf.net/Dr._Mario_64#Passwords).
 For now only the US version of the game is supported (I'd have to check if the unreleased JP version uses the same character encoding for the names embedded in the passwords).
 ## License
