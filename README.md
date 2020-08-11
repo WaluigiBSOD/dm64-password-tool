@@ -14,7 +14,7 @@ If you wish to use any copyrighted material from this program for purposes of yo
 1. Clone the repository into a folder.
 2. Compile all the `.cpp` files into object code and link them to make an executable. You must use the ISO C++2011 standard to compile them.
 ## Usage
-See the usage in `Print.cpp`.
+See the usage in `PrintUsage.cpp`.
 ## Testing
 It was tested on Windows 10 by compiling it with Min-GW and using the US version of the game.
 To test it more, I added an automatic test routine on startup that I plan to remove in future releases (no telemetry involved).
