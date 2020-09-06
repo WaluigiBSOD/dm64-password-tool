@@ -1,5 +1,5 @@
 // Dr. Mario 64 Password Encoder/Decoder Tool
-// Copyright (C) 2020  Waluigi BSOD (waluigibsod.github.io)
+// Copyright (C) 2020  WaluigiBSOD (waluigibsod.github.io)
 //
 // This file is part of Dr. Mario 64 Password Encoder/Decoder Tool.
 //
@@ -38,7 +38,7 @@ bool _AutoTest(bool Show = false) {
         if (_CheckPassword(Password,false,false) != PasswordOK) {
             cout << endl << " [!] AutoTest ... " << "FAIL" << endl;
             _CheckPassword(Password,true,true);
-            cout << "Send the password to Waluigi BSOD and tell him about the error." << endl;
+            cout << "Send the password to WaluigiBSOD and tell him about the error." << endl;
             return false;
         }
     }

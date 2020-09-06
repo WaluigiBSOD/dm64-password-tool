@@ -2,7 +2,7 @@
 #define AUTOTEST_H_INCLUDED
 
 // Dr. Mario 64 Password Encoder/Decoder Tool
-// Copyright (C) 2020  Waluigi BSOD (waluigibsod.github.io)
+// Copyright (C) 2020  WaluigiBSOD (waluigibsod.github.io)
 //
 // This file is part of Dr. Mario 64 Password Encoder/Decoder Tool.
 //
