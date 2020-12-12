@@ -18,4 +18,9 @@
 
 #pragma once
 
-bool _OnlyDigits(char* Array, int Length);
+#include <string>
+
+using namespace std;
+
+string _EncodePassword(unsigned char GameMode, unsigned char Level, unsigned char Speed, unsigned int Score, unsigned short Time, unsigned char Name[], unsigned int FrameCount);
+bool _DecodePassword(const char Password[], unsigned char& GameMode, unsigned char& Level, unsigned char& Speed, unsigned int& Score, unsigned short& Time, unsigned char Name[], unsigned int& FrameCount);

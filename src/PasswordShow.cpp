@@ -1,5 +1,5 @@
 // Dr. Mario 64 Password Encoder/Decoder Tool
-// Copyright (C) 2020  WaluigiBSOD (waluigibsod.github.io)
+// Copyright (C) 2020 WaluigiBSOD (waluigibsod.github.io)
 //
 // This file is part of Dr. Mario 64 Password Encoder/Decoder Tool.
 //
@@ -10,37 +10,25 @@
 //
 // Dr. Mario 64 Password Encoder/Decoder Tool is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+// along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 #include <iostream>
 #include <iomanip>
 
 using namespace std;
 
-#include "Password.h"
+#include "Constants.h"
+#include "PasswordDecodeEncode.h"
 #include "PasswordCheck.h"
 #include "PlayerName.h"
 
-extern const unsigned char PasswordOK;
-
-extern const unsigned char GameModeClassic;
-extern const unsigned char GameModeScoreAttack;
-extern const unsigned char GameModeMarathon;
-
-extern const unsigned char GameLevelEasy;
-extern const unsigned char GameLevelMedium;
-extern const unsigned char GameLevelHard;
-
-extern const unsigned char SpeedLow;
-extern const unsigned char SpeedMedium;
-extern const unsigned char SpeedHigh;
-
 unsigned char _ShowDecodedPassword(string Password) {
     unsigned char PasswordCheck = _CheckPassword(Password);
+
     if (PasswordCheck != PasswordOK)
         return PasswordCheck;
 
@@ -65,23 +53,21 @@ unsigned char _ShowDecodedPassword(string Password) {
         else if (GameMode == GameModeMarathon)
             cout << "Marathon";
 
-        cout << endl;
-        cout << endl;
+        cout << endl << endl;
 
         if (GameMode != GameModeClassic) {
             cout << "Game Level: ";
 
             if (Level == GameLevelEasy)
                 cout << "Easy";
-            else if (Level == GameLevelMedium)
+            else if (Level == GameLevelNormal)
                 cout << "Normal";
             else if (Level == GameLevelHard)
                 cout << "Hard";
         } else
-            cout << "Virus Level: " << (unsigned int)Level;;
+            cout << "Virus Level: " << (unsigned int)Level;
 
-        cout << endl;
-        cout << endl;
+        cout << endl << endl;
 
         cout << "Speed: ";
 
@@ -92,13 +78,11 @@ unsigned char _ShowDecodedPassword(string Password) {
         else if (Speed == SpeedHigh)
             cout << "High";
 
-        cout << endl;
-        cout << endl;
+        cout << endl << endl;
 
         cout << "Score: " << setw(6) << setfill('0') << Score << '0';
 
-        cout << endl;
-        cout << endl;
+        cout << endl << endl;
 
         unsigned int TimeSec = Time / 10;
         unsigned int TimeMin = TimeSec / 60;
@@ -108,8 +92,7 @@ unsigned char _ShowDecodedPassword(string Password) {
         cout << "      mm : ss . f" << endl << endl;
         cout << "Time: " << setw(2) << setfill('0') << TimeMin << " : " << setw(2) << setfill('0') << TimeSec << " . " << (Time % 10);
 
-        cout << endl;
-        cout << endl;
+        cout << endl << endl;
 
         ConversationalName[0] = _ConversationalInternalCharacter(Name[0]);
         ConversationalName[1] = _ConversationalInternalCharacter(Name[1]);
@@ -152,13 +135,11 @@ unsigned char _ShowDecodedPassword(string Password) {
         else
             cout << Name[3];
 
-        cout << endl;
-        cout << endl;
+        cout << endl << endl;
 
         cout << "Frame Count (modulo 1024): " << FrameCount;
 
-        cout << endl;
-        cout << endl;
+        cout << endl << endl;
 
         cout << " ---";
 

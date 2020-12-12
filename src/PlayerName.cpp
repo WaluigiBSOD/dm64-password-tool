@@ -1,5 +1,5 @@
 // Dr. Mario 64 Password Encoder/Decoder Tool
-// Copyright (C) 2020  WaluigiBSOD (waluigibsod.github.io)
+// Copyright (C) 2020 WaluigiBSOD (waluigibsod.github.io)
 //
 // This file is part of Dr. Mario 64 Password Encoder/Decoder Tool.
 //
@@ -10,41 +10,17 @@
 //
 // Dr. Mario 64 Password Encoder/Decoder Tool is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+// along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 #include <string>
 
 using namespace std;
 
-extern const unsigned char SpecialCharacterTilde;
-extern const unsigned char SpecialCharacterSlashSmall;
-extern const unsigned char SpecialCharacterCenteredDot;
-extern const unsigned char SpecialCharacterDot;
-extern const unsigned char SpecialCharacterQuestionMark;
-extern const unsigned char SpecialCharacterHeart;
-extern const unsigned char SpecialCharacterStar;
-extern const unsigned char SpecialCharacterCircle;
-extern const unsigned char SpecialCharacterMarkX;
-extern const unsigned char SpecialCharacterSlashBig;
-extern const unsigned char SpecialCharacterColon;
-extern const unsigned char SpecialCharacterPercentual;
-extern const unsigned char SpecialCharacterAccent;
-extern const unsigned char SpecialCharacterAmperstand;
-extern const unsigned char SpecialCharacterDotAlternative;
-
-extern const unsigned char InternalToASCIICharacterTable[];
-extern const unsigned int InternalCharacterTableSize;
-
-extern const string AlphabeticNumericASCII;
-extern const char SpecialASCII[];
-
-extern const char ConversionInternalToAsciiError;
-extern const char ConversionAsciiToInternal;
-extern const string ConversionInternalToConversationalError;
+#include "Constants.h"
 
 bool _PlayerNameValidCharacter(unsigned char Character) {
     for (unsigned char i=0;i<InternalCharacterTableSize;i++)
@@ -174,7 +150,7 @@ unsigned char _ConvertASCIICharacterToInternal(unsigned char ASCIICharacter) {
     else if (ASCIICharacter == SpecialCharacterDotAlternative)
         return 243; // . (copy)
 
-    return ConversionAsciiToInternal;
+    return ConversionAsciiToInternalError;
 }
 
 string _ConversationalInternalCharacter(unsigned char InternalCharacter) {
@@ -215,5 +191,6 @@ string _ConversationalInternalCharacter(unsigned char InternalCharacter) {
                 return ". (copy)";
                 break;
         }
+
     return ConversionInternalToConversationalError;
 }

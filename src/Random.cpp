@@ -16,6 +16,24 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-#pragma once
+#include <chrono>
+#include <random>
 
-bool _OnlyDigits(char* Array, int Length);
+#include "Constants.h"
+
+using namespace std;
+
+mt19937 MersenneTwister(chrono::high_resolution_clock::now().time_since_epoch().count());
+
+uniform_int_distribution<> Modulo2(0,1);
+uniform_int_distribution<> Modulo3(0,2);
+uniform_int_distribution<> Modulo10(0,9);
+uniform_int_distribution<> Modulo60(0,59);
+uniform_int_distribution<> Modulo100(0,99);
+
+uniform_int_distribution<> RandomInternalCharacter(0,InternalCharacterTableSize - 1);
+
+uniform_int_distribution<> VirusLevelPRNG(VirusLevelMinimum,VirusLevelMaximum);
+uniform_int_distribution<> ScorePRNG(ScoreMinimum,ScoreMaximum);
+uniform_int_distribution<> TimePRNG(TimeMinimum,TimeMaximum);
+uniform_int_distribution<> FrameCountPRNG(FrameCountMinimum,FrameCountMaximum);

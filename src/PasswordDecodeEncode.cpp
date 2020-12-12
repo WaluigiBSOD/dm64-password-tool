@@ -1,5 +1,5 @@
 // Dr. Mario 64 Password Encoder/Decoder Tool
-// Copyright (C) 2020  WaluigiBSOD (waluigibsod.github.io)
+// Copyright (C) 2020 WaluigiBSOD (waluigibsod.github.io)
 //
 // This file is part of Dr. Mario 64 Password Encoder/Decoder Tool.
 //
@@ -10,31 +10,21 @@
 //
 // Dr. Mario 64 Password Encoder/Decoder Tool is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+// along with this program. If not, see <https://www.gnu.org/licenses/>.
 
+#include "Constants.h"
 #include "PlayerName.h"
 #include "PasswordCheck.h"
 #include "PasswordShow.h"
 #include "PasswordMiscellaneous.h"
 
-#define PASSWORD_CHUNK_HIGH                                         Chunk[0]
-#define PASSWORD_CHUNK_MEDIUM                                       Chunk[1]
-#define PASSWORD_CHUNK_LOW                                          Chunk[2]
-
-extern const unsigned int TableMaskHigh[4];
-extern const unsigned int TableMaskMiddle[4];
-extern const unsigned int TableMaskLower[4];
-
-extern const unsigned int TableMaskFrameCountLower[32];
-extern const unsigned int TableMaskFrameCountUpper[32];
-
-extern const string PasswordCharacters;
-
-extern const unsigned char PasswordOK;
+#define PASSWORD_CHUNK_HIGH                                         PasswordChunk[0]
+#define PASSWORD_CHUNK_MEDIUM                                       PasswordChunk[1]
+#define PASSWORD_CHUNK_LOW                                          PasswordChunk[2]
 
 // Parameters
 //
@@ -54,7 +44,7 @@ string _EncodePassword(unsigned char GameMode, unsigned char Level, unsigned cha
 
     unsigned char SplitFrameCount[2];
     unsigned int CheckSum;
-    unsigned int Chunk[3];
+    unsigned int PasswordChunk[3];
 
 	SplitFrameCount[0] = FrameCount & 0x1F;
 	SplitFrameCount[1] = (FrameCount >> 5) & 0x1F;
@@ -123,7 +113,7 @@ string _EncodePassword(unsigned char GameMode, unsigned char Level, unsigned cha
 
 bool _DecodePassword(const char Password[], unsigned char& GameMode, unsigned char& Level, unsigned char& Speed, unsigned int& Score, unsigned short& Time, unsigned char Name[], unsigned int& FrameCount) {
     unsigned char SplitFrameCount[2];
-    unsigned int Chunk[3] = {};
+    unsigned int PasswordChunk[3] = {};
 
     unsigned char FrameMaskCounter;
 

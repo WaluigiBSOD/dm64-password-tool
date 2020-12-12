@@ -1,8 +1,5 @@
-#ifndef PASSWORD_H_INCLUDED
-#define PASSWORD_H_INCLUDED
-
 // Dr. Mario 64 Password Encoder/Decoder Tool
-// Copyright (C) 2020  WaluigiBSOD (waluigibsod.github.io)
+// Copyright (C) 2020 WaluigiBSOD (waluigibsod.github.io)
 //
 // This file is part of Dr. Mario 64 Password Encoder/Decoder Tool.
 //
@@ -13,17 +10,20 @@
 //
 // Dr. Mario 64 Password Encoder/Decoder Tool is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+// along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+#pragma once
 
 #include <string>
 
 using namespace std;
 
-string _EncodePassword(unsigned char GameMode, unsigned char Level, unsigned char Speed, unsigned int Score, unsigned short Time, unsigned char Name[], unsigned int FrameCount);
-bool _DecodePassword(const char Password[], unsigned char& GameMode, unsigned char& Level, unsigned char& Speed, unsigned int& Score, unsigned short& Time, unsigned char Name[], unsigned int& FrameCount);
+extern const string AsciiArtViruses[3];
 
-#endif // PASSWORD_H_INCLUDED
+extern const string AsciiArtVirusesLaughing[3];
+
+extern const string AsciiArtDrMario[2];

@@ -1,5 +1,5 @@
 // Dr. Mario 64 Password Encoder/Decoder Tool
-// Copyright (C) 2020  WaluigiBSOD (waluigibsod.github.io)
+// Copyright (C) 2020 WaluigiBSOD (waluigibsod.github.io)
 //
 // This file is part of Dr. Mario 64 Password Encoder/Decoder Tool.
 //
@@ -10,33 +10,15 @@
 //
 // Dr. Mario 64 Password Encoder/Decoder Tool is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+// along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-#include <random>
-
-#include "Password.h"
-
-extern const unsigned char GameModeClassic;
-extern const unsigned char GameModes[3];
-extern const unsigned char GameLevel[3];
-extern const unsigned char GameSpeed[3];
-
-extern const unsigned char InternalToASCIICharacterTable[];
-
-extern mt19937 MersenneTwister;
-
-extern uniform_int_distribution<> Modulo3;
-
-extern uniform_int_distribution<> RandomInternalCharacter;
-
-extern uniform_int_distribution<> VirusLevelPRNG;
-extern uniform_int_distribution<> ScorePRNG;
-extern uniform_int_distribution<> TimePRNG;
-extern uniform_int_distribution<> FrameCountPRNG;
+#include "Constants.h"
+#include "PasswordDecodeEncode.h"
+#include "Random.h"
 
 string _GenerateRandomPassword() {
 

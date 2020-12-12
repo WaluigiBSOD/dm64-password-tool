@@ -1,5 +1,5 @@
 // Dr. Mario 64 Password Encoder/Decoder Tool
-// Copyright (C) 2020  WaluigiBSOD (waluigibsod.github.io)
+// Copyright (C) 2020 WaluigiBSOD (waluigibsod.github.io)
 //
 // This file is part of Dr. Mario 64 Password Encoder/Decoder Tool.
 //
@@ -10,61 +10,30 @@
 //
 // Dr. Mario 64 Password Encoder/Decoder Tool is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+// along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 #include <iostream>
 #include <iomanip>
-#include <random>
+#include <sstream>
 
 using namespace std;
 
+#include "Constants.h"
 #include "PlayerName.h"
 #include "PasswordMiscellaneous.h"
 #include "PasswordShow.h"
+#include "StringFunctions.h"
+#include "Random.h"
 
 #define USAGE_TABULATIONS_1     "\t"
 #define USAGE_TABULATIONS_2     "\t\t"
 #define USAGE_TABULATIONS_3     "\t\t\t"
 
-#define USAGE_SPACING           1
-#define USAGE_WIDTH             64
-
 extern const string ProgramVersion;
-
-extern const char SpecialASCII[];
-extern const unsigned int SpecialASCIISize;
-
-extern const unsigned char GameModeClassic;
-extern const unsigned char GameModeScoreAttack;
-extern const unsigned char GameModeMarathon;
-
-extern const unsigned char GameLevelEasy;
-extern const unsigned char GameLevelMedium;
-extern const unsigned char GameLevelHard;
-
-extern const unsigned char SpeedLow;
-extern const unsigned char SpeedMedium;
-extern const unsigned char SpeedHigh;
-
-extern const unsigned char VirusLevelMinimum;
-extern const unsigned char VirusLevelMaximum;
-
-extern const unsigned int ScoreMinimum;
-extern const unsigned int ScoreMaximum;
-
-extern const unsigned short TimeMinimum;
-extern const unsigned short TimeMaximum;
-
-extern const unsigned int FrameCountMinimum;
-extern const unsigned int FrameCountMaximum;
-
-extern mt19937 MersenneTwister;
-extern uniform_int_distribution<> Modulo60;
-extern uniform_int_distribution<> Modulo100;
 
 extern string ExecutableName;
 
@@ -79,29 +48,6 @@ string _GetExecutableName(char* FullPath, int Size) {
     }
 
     return retNAME;
-}
-
-void _CenterString(string ToCenter, unsigned int SpacingLeft, unsigned int Width) {
-    if (ToCenter == "" || ToCenter.size() > Width) {
-        for (unsigned int i=0;i<SpacingLeft;i++)
-            cout << ' ';
-        for (unsigned int i=0;i<Width;i++)
-            if (i == 0 || (i + 1) == Width)
-                cout << '+';
-            else
-                cout << '-';
-    } else {
-        unsigned int TotalSpacing = (Width - ToCenter.size()) / 2;
-        for (unsigned int i=0;i<TotalSpacing + SpacingLeft;i++)
-            if (i == SpacingLeft)
-                cout << '|';
-            else
-                cout << ' ';
-        cout << ToCenter;
-        for (unsigned int i=0;(i + 1)<TotalSpacing + (ToCenter.size() % 2);i++)
-            cout << ' ';
-        cout << '|';
-    }
 }
 
 void _PrintSpecialCharacterTable() {
@@ -141,7 +87,7 @@ void _PrintUsageInfo() {
 
     cout << "mode" << USAGE_TABULATIONS_3 << "Game mode (" << (unsigned int)(GameModeClassic) << " - Classic, " << (unsigned int)(GameModeScoreAttack) << " - Score Attack, " << (unsigned int)(GameModeMarathon) << " - Marathon)." << endl;
 
-    cout << "game/virus level" << USAGE_TABULATIONS_1 << "Virus Level (" << (unsigned int)(VirusLevelMinimum) << " to " << (unsigned int)(VirusLevelMaximum) << ") for Classic mode, Game Level otherwise (" << (unsigned int)(GameLevelEasy) << " - Easy, " << (unsigned int)(GameLevelMedium) << " - Medium, " << (unsigned int)(GameLevelHard) << " - Hard)" << endl;
+    cout << "game/virus level" << USAGE_TABULATIONS_1 << "Virus Level (" << (unsigned int)(VirusLevelMinimum) << " to " << (unsigned int)(VirusLevelMaximum) << ") for Classic mode, Game Level otherwise (" << (unsigned int)(GameLevelEasy) << " - Easy, " << (unsigned int)(GameLevelNormal) << " - Medium, " << (unsigned int)(GameLevelHard) << " - Hard)" << endl;
 
     cout << "speed" << USAGE_TABULATIONS_3 << "Speed of the game (" << (unsigned int)(SpeedLow) << " - Low, " << (unsigned int)(SpeedMedium) << " - Medium, " << (unsigned int)(SpeedHigh) << " - High)." << endl;
 
@@ -164,7 +110,7 @@ void _PrintUsageInfo() {
 
     cout << "mode" << USAGE_TABULATIONS_3 << "Game mode (" << (unsigned int)(GameModeClassic) << " - Classic, " << (unsigned int)(GameModeScoreAttack) << " - Score Attack, " << (unsigned int)(GameModeMarathon) << " - Marathon)." << endl;
 
-    cout << "game/virus level" << USAGE_TABULATIONS_1 << "Virus Level (" << (unsigned int)(VirusLevelMinimum) << " to " << (unsigned int)(VirusLevelMaximum) << ") for Classic mode, Game Level otherwise (" << (unsigned int)(GameLevelEasy) << " - Easy, " << (unsigned int)(GameLevelMedium) << " - Medium, " << (unsigned int)(GameLevelHard) << " - Hard)" << endl;
+    cout << "game/virus level" << USAGE_TABULATIONS_1 << "Virus Level (" << (unsigned int)(VirusLevelMinimum) << " to " << (unsigned int)(VirusLevelMaximum) << ") for Classic mode, Game Level otherwise (" << (unsigned int)(GameLevelEasy) << " - Easy, " << (unsigned int)(GameLevelNormal) << " - Medium, " << (unsigned int)(GameLevelHard) << " - Hard)" << endl;
 
     cout << "speed" << USAGE_TABULATIONS_3 << "Speed of the game (" << (unsigned int)(SpeedLow) << " - Low, " << (unsigned int)(SpeedMedium) << " - Medium, " << (unsigned int)(SpeedHigh) << " - High)." << endl;
 
@@ -182,49 +128,43 @@ void _PrintUsageInfo() {
 }
 
 void _PrintSplashScreen() {
-    cout << endl;
+    cout << _CenterString();
 
-    _CenterString("",USAGE_SPACING,USAGE_WIDTH);
+    cout << _CenterString("Dr. Mario 64 Password Encoder/Decoder Tool");
 
-    cout << endl;
+    cout << _CenterString();
 
-    _CenterString("Dr. Mario 64 Password Encoder/Decoder Tool",USAGE_SPACING,USAGE_WIDTH);
+    cout << _CenterString("Version " + ProgramVersion);
 
-    cout << endl;
+    cout << _CenterString("Copyright (C) 2020 WaluigiBSOD (waluigibsod.github.io)");
 
-    _CenterString("",USAGE_SPACING,USAGE_WIDTH);
+    cout << _CenterString();
 
-    cout << endl;
+    if (ProgramVersion.find("(") != string::npos) {
+        cout << _CenterString("FOR INTERNAL USE ONLY - DO NOT REDISTRIBUTE");
 
-    _CenterString("Version " + ProgramVersion,USAGE_SPACING,USAGE_WIDTH);
+        cout << _CenterString();
 
-    cout << endl;
+        if (AutotestIterations > 0) {
+            stringstream AutotestIterationsString;
 
-    _CenterString("Copyright (C) 2020  WaluigiBSOD (waluigibsod.github.io)",USAGE_SPACING,USAGE_WIDTH);
+            AutotestIterationsString << AutotestIterations;
 
-    cout << endl;
+            cout << _CenterString("Autotest Iterations: " + AutotestIterationsString.str());
+        } else {
+            cout << _CenterString("No Autotest");
+        }
+    } else {
+        cout << _CenterString("This program comes with ABSOLUTELY NO WARRANTY.");
 
-    _CenterString("",USAGE_SPACING,USAGE_WIDTH);
+        cout << _CenterString("This is free software, and you are welcome to redistribute it");
 
-    cout << endl;
+        cout << _CenterString("under certain conditions.");
 
-    _CenterString("This program comes with ABSOLUTELY NO WARRANTY.",USAGE_SPACING,USAGE_WIDTH);
+        cout << _CenterString("See the GNU General Public License v3.0 for more details.");
+    }
 
-    cout << endl;
-
-    _CenterString("This is free software, and you are welcome to redistribute it",USAGE_SPACING,USAGE_WIDTH);
-
-    cout << endl;
-
-    _CenterString("under certain conditions.",USAGE_SPACING,USAGE_WIDTH);
-
-    cout << endl;
-
-    _CenterString("See the GNU General Public License v3.0 for more details.",USAGE_SPACING,USAGE_WIDTH);
+    cout << _CenterString();
 
     cout << endl;
-
-    _CenterString("",USAGE_SPACING,USAGE_WIDTH);
-
-    cout << endl << endl;
 }

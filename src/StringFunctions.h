@@ -18,4 +18,11 @@
 
 #pragma once
 
-bool _OnlyDigits(char* Array, int Length);
+#include <string>
+
+using namespace std;
+
+extern const unsigned char StringCenterLeftSpacing;
+extern const unsigned char StringCenterWidth;
+
+string _CenterString(string ToCenter = "", bool PrintBorder = true, unsigned int SpacingLeft = StringCenterLeftSpacing, unsigned int Width = StringCenterWidth);

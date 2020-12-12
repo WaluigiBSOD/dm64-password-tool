@@ -18,4 +18,12 @@
 
 #pragma once
 
-bool _OnlyDigits(char* Array, int Length);
+#include <string>
+
+using namespace std;
+
+void _PrintErrorMessage(string Message, bool End = true);
+
+bool _PrintDataTypeError(string Name, unsigned int CurrentByteSize, unsigned int CorrectByteSize);
+
+int _PrintErrorMessageWithReturnValue(string Name, int ReturnValue, bool Irreversible = false);

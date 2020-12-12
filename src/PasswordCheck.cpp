@@ -1,5 +1,5 @@
 // Dr. Mario 64 Password Encoder/Decoder Tool
-// Copyright (C) 2020  WaluigiBSOD (waluigibsod.github.io)
+// Copyright (C) 2020 WaluigiBSOD (waluigibsod.github.io)
 //
 // This file is part of Dr. Mario 64 Password Encoder/Decoder Tool.
 //
@@ -10,86 +10,74 @@
 //
 // Dr. Mario 64 Password Encoder/Decoder Tool is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+// along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 #include <iostream>
+#include <sstream>
 
-#include "Password.h"
+#include "Constants.h"
+#include "PasswordDecodeEncode.h"
 #include "PlayerName.h"
+#include "PrintError.h"
 
-extern const unsigned char GameModeClassic;
-extern const unsigned char GameModeScoreAttack;
-extern const unsigned char GameModeMarathon;
+unsigned int _CheckPasswordData(unsigned char GameMode, unsigned char Level, unsigned char Speed, unsigned int Score, unsigned short Time, unsigned char Name[], unsigned int FrameCount, bool Argument = false) {
 
-extern const unsigned char GameLevelEasy;
-extern const unsigned char GameLevelMedium;
-extern const unsigned char GameLevelHard;
-
-extern const unsigned char SpeedLow;
-extern const unsigned char SpeedMedium;
-extern const unsigned char SpeedHigh;
-
-extern const unsigned char VirusLevelMinimum;
-extern const unsigned char VirusLevelMaximum;
-
-extern const unsigned int ScoreMinimum;
-extern const unsigned int ScoreMaximum;
-
-extern const unsigned short TimeMinimum;
-extern const unsigned short TimeMaximum;
-
-extern const unsigned int FrameCountMinimum;
-extern const unsigned int FrameCountMaximum;
-
-extern const unsigned char PasswordOK;
-extern const unsigned char PasswordInvalidLength;
-extern const unsigned char PasswordInvalidCharacters;
-extern const unsigned char PasswordDecodeError;
-extern const unsigned char PasswordInvalidGameMode;
-extern const unsigned char PasswordInvalidNonClassicLevel;
-extern const unsigned char PasswordInvalidLevel;
-extern const unsigned char PasswordInvalidSpeed;
-extern const unsigned char PasswordInvalidScore;
-extern const unsigned char PasswordInvalidTime;
-extern const unsigned char PasswordInvalidName;
-extern const unsigned char PasswordInvalidFrameCount;
-
-extern const string PasswordCharacters;
-
-unsigned char _CheckPasswordData(unsigned char GameMode, unsigned char Level, unsigned char Speed, unsigned int Score, unsigned short Time, unsigned char Name[], unsigned int FrameCount) {
-
-    if (GameMode != GameModeClassic && GameMode != GameModeMarathon && GameMode != GameModeScoreAttack)
+    if (GameMode != GameModeClassic && GameMode != GameModeMarathon && GameMode != GameModeScoreAttack) {
+        if (Argument)
+            return _PrintErrorMessageWithReturnValue("Game Mode",ArgumentInvalidGameMode);
         return PasswordInvalidGameMode;
+    }
 
-    if (GameMode != GameModeClassic && (Level != GameLevelEasy && Level != GameLevelMedium && Level != GameLevelHard))
+    if (GameMode != GameModeClassic && (Level != GameLevelEasy && Level != GameLevelNormal && Level != GameLevelHard)) {
+        if (Argument)
+            return _PrintErrorMessageWithReturnValue("Level",ArgumentInvalidLevel);
         return PasswordInvalidNonClassicLevel;
+    }
 
-    if (Level < VirusLevelMinimum || Level > VirusLevelMaximum)
+    if (Level < VirusLevelMinimum || Level > VirusLevelMaximum) {
+        if (Argument)
+            return _PrintErrorMessageWithReturnValue("Level",ArgumentInvalidLevel);
         return PasswordInvalidLevel;
+    }
 
-    if (Speed != SpeedLow && Speed != SpeedMedium && Speed != SpeedHigh)
+    if (Speed != SpeedLow && Speed != SpeedMedium && Speed != SpeedHigh) {
+        if (Argument)
+            return _PrintErrorMessageWithReturnValue("Speed",ArgumentInvalidSpeed);
         return PasswordInvalidSpeed;
+    }
 
-    if (Score < ScoreMinimum || Score > ScoreMaximum)
+    if (Score < ScoreMinimum || Score > ScoreMaximum) {
+        if (Argument)
+            return _PrintErrorMessageWithReturnValue("Score",ArgumentInvalidScore);
         return PasswordInvalidScore;
+    }
 
-    if (Time < TimeMinimum || Time > TimeMaximum)
+    if (Time < TimeMinimum || Time > TimeMaximum) {
+        if (Argument)
+            return _PrintErrorMessageWithReturnValue("Time",ArgumentInvalidTime);
         return PasswordInvalidTime;
+    }
 
-    if (!_PlayerNameValidCharacter(Name[0]) || !_PlayerNameValidCharacter(Name[1]) || !_PlayerNameValidCharacter(Name[2]) || !_PlayerNameValidCharacter(Name[3]))
+    if (!_PlayerNameValidCharacter(Name[0]) || !_PlayerNameValidCharacter(Name[1]) || !_PlayerNameValidCharacter(Name[2]) || !_PlayerNameValidCharacter(Name[3])) {
+        if (Argument)
+            return _PrintErrorMessageWithReturnValue("Name",ArgumentInvalidName);
         return PasswordInvalidName;
+    }
 
-    if (FrameCount < FrameCountMinimum || FrameCount > FrameCountMaximum)
+    if (FrameCount < FrameCountMinimum || FrameCount > FrameCountMaximum) {
+        if (Argument)
+            return _PrintErrorMessageWithReturnValue("Frame Count",ArgumentInvalidFrameCount);
         return PasswordInvalidFrameCount;
+    }
 
     return PasswordOK;
 }
 
-unsigned char _IsPasswordWrong(string Password) {
+unsigned int _IsPasswordWrong(string Password) {
     // Length check (must be equal to 20 characters)
     if (Password.size() != 20)
         return PasswordInvalidLength;
@@ -120,30 +108,43 @@ unsigned char _IsPasswordWrong(string Password) {
     return _CheckPasswordData(GameMode,Level,Speed,Score,Time,Name,FrameCount);
 }
 
-void _DisplayPasswordResult(unsigned char Result) {
+void _DisplayPasswordResult(unsigned int Result) {
     if (Result == PasswordOK)
         cout << "OK";
-    else if (Result == PasswordInvalidLength)
-        cout << "Length not valid";
-    else if (Result == PasswordInvalidCharacters)
-        cout << "It contains one or more invalid characters";
-    else if (Result == PasswordDecodeError)
-        cout << "Checksum error";
-    else if (Result == PasswordInvalidGameMode)
-        cout << "The decoded game mode is invalid";
-    else if (Result == PasswordInvalidNonClassicLevel)
-        cout << "The decoded level is invalid with the decoded game mode";
-    else if (Result == PasswordInvalidLevel)
-        cout << "The decoded level is invalid (must be between " << VirusLevelMinimum << " and " << VirusLevelMaximum << ", both inclusive)";
-    else if (Result == PasswordInvalidScore)
-        cout << "The decoded score is invalid (must be between " << ScoreMinimum << " and " << ScoreMaximum << ", both inclusive)";
-    else if (Result == PasswordInvalidTime)
-        cout << "The decoded time is invalid (must be between " << TimeMinimum << " and " << TimeMaximum << ", both inclusive)";
-    else if (Result == PasswordInvalidFrameCount)
-        cout << "The decoded frame count is invalid (must be between " << FrameCountMinimum << " and " << FrameCountMaximum << ", both inclusive)";
+    else {
+        stringstream PrintError;
+
+        if (Result == PasswordInvalidLength)
+            _PrintErrorMessage("Length not valid");
+        else if (Result == PasswordInvalidCharacters)
+            _PrintErrorMessage("It contains one or more invalid characters");
+        else if (Result == PasswordDecodeError)
+            _PrintErrorMessage("Checksum error");
+        else if (Result == PasswordInvalidGameMode)
+            _PrintErrorMessage("The decoded game mode is invalid");
+        else if (Result == PasswordInvalidNonClassicLevel)
+            _PrintErrorMessage("The decoded level is invalid with the decoded game mode");
+        else if (Result == PasswordInvalidLevel) {
+            PrintError << "The decoded level is invalid (must be between " << VirusLevelMinimum << " and " << VirusLevelMaximum << ", both inclusive)";
+
+            _PrintErrorMessage(PrintError.str());
+        } else if (Result == PasswordInvalidScore) {
+            PrintError << "The decoded score is invalid (must be between " << ScoreMinimum << " and " << ScoreMaximum << ", both inclusive)";
+
+            _PrintErrorMessage(PrintError.str());
+        } else if (Result == PasswordInvalidTime) {
+            PrintError << "The decoded time is invalid (must be between " << TimeMinimum << " and " << TimeMaximum << ", both inclusive)";
+
+            _PrintErrorMessage(PrintError.str());
+        } else if (Result == PasswordInvalidFrameCount) {
+            PrintError << "The decoded frame count is invalid (must be between " << FrameCountMinimum << " and " << FrameCountMaximum << ", both inclusive)";
+
+            _PrintErrorMessage(PrintError.str());
+        }
+    }
 }
 
-unsigned char _CheckPassword(string Password, bool DisplayResult = true, bool DisplayPassword = true) {
+unsigned int _CheckPassword(string Password, bool DisplayResult = true, bool DisplayPassword = true) {
     if (DisplayResult) {
         cout << " [!] Checking ";
         if (DisplayPassword)
@@ -153,19 +154,17 @@ unsigned char _CheckPassword(string Password, bool DisplayResult = true, bool Di
         cout << " ... ";
     }
 
-    unsigned char Result = _IsPasswordWrong(Password);
+    unsigned int Result = _IsPasswordWrong(Password);
 
     if (DisplayResult && Result != PasswordOK)
-        cout << "ERROR (";
+        cout << endl << endl;
 
     if (DisplayResult) {
 
         _DisplayPasswordResult(Result);
 
-        if (Result != PasswordOK)
-            cout << ")";
-
-        cout << endl << endl;
+        if (Result == PasswordOK)
+            cout << endl << endl;
     }
 
     return Result;

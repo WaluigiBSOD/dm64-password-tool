@@ -1,8 +1,5 @@
-#ifndef PLAYERNAME_H_INCLUDED
-#define PLAYERNAME_H_INCLUDED
-
 // Dr. Mario 64 Password Encoder/Decoder Tool
-// Copyright (C) 2020  WaluigiBSOD (waluigibsod.github.io)
+// Copyright (C) 2020 WaluigiBSOD (waluigibsod.github.io)
 //
 // This file is part of Dr. Mario 64 Password Encoder/Decoder Tool.
 //
@@ -13,11 +10,13 @@
 //
 // Dr. Mario 64 Password Encoder/Decoder Tool is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+// along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+#pragma once
 
 #include <string>
 
@@ -27,5 +26,3 @@ bool _PlayerNameValidCharacter(unsigned char Character);
 unsigned char _ConvertInternalCharacterToASCII(unsigned char InternalCharacter);
 unsigned char _ConvertASCIICharacterToInternal(unsigned char ASCIICharacter);
 string _ConversationalInternalCharacter(unsigned char InternalCharacter);
-
-#endif // PLAYERNAME_H_INCLUDED

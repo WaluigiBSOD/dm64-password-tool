@@ -18,4 +18,19 @@
 
 #pragma once
 
-bool _OnlyDigits(char* Array, int Length);
+#include <random>
+
+extern mt19937 MersenneTwister;
+
+extern uniform_int_distribution<> Modulo2;
+extern uniform_int_distribution<> Modulo3;
+extern uniform_int_distribution<> Modulo10;
+extern uniform_int_distribution<> Modulo60;
+extern uniform_int_distribution<> Modulo100;
+
+extern uniform_int_distribution<> RandomInternalCharacter;
+
+extern uniform_int_distribution<> VirusLevelPRNG;
+extern uniform_int_distribution<> ScorePRNG;
+extern uniform_int_distribution<> TimePRNG;
+extern uniform_int_distribution<> FrameCountPRNG;
