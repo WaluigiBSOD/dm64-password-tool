@@ -1,14 +1,14 @@
-// Dr. Mario 64 Password Encoder/Decoder Tool
+// Dr. Mario 64 Password Generator/Decoder Tool
 // Copyright (C) 2020 WaluigiBSOD (waluigibsod.github.io)
 //
-// This file is part of Dr. Mario 64 Password Encoder/Decoder Tool.
+// This file is part of Dr. Mario 64 Password Generator/Decoder Tool.
 //
-// Dr. Mario 64 Password Encoder/Decoder Tool is free software: you can redistribute it and/or modify
+// Dr. Mario 64 Password Generator/Decoder Tool is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Dr. Mario 64 Password Encoder/Decoder Tool is distributed in the hope that it will be useful,
+// Dr. Mario 64 Password Generator/Decoder Tool is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
@@ -80,7 +80,7 @@ void _PrintUsageInfo() {
 
     cout << endl;
 
-    cout << " ### Encode (in-game information) ###" << endl << endl;
+    cout << " ### Generate (in-game information) ###" << endl << endl;
 
     cout << ExecutableName << " <mode> <game/virus level> <speed> <score> <in-game time> <name>";
     cout << endl << endl;
@@ -103,7 +103,7 @@ void _PrintUsageInfo() {
 
     cout << endl;
 
-    cout << " ### Encode (full information) ###" << endl << endl;
+    cout << " ### Generate (full information) ###" << endl << endl;
 
     cout << ExecutableName << " <mode> <game/virus level> <speed> <score> <time (tenths of a second)> <name> <frame count>";
     cout << endl << endl;
@@ -130,13 +130,13 @@ void _PrintUsageInfo() {
 void _PrintSplashScreen() {
     cout << _CenterString();
 
-    cout << _CenterString("Dr. Mario 64 Password Encoder/Decoder Tool");
+    cout << _CenterString("Dr. Mario 64 Password Generator/Decoder Tool");
 
     cout << _CenterString();
 
     cout << _CenterString("Version " + ProgramVersion);
 
-    cout << _CenterString("Copyright (C) 2020 WaluigiBSOD (waluigibsod.github.io)");
+    cout << _CenterString("Copyright (C) 2020-present WaluigiBSOD (waluigibsod.github.io)");
 
     cout << _CenterString();
 

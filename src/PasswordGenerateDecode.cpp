@@ -1,14 +1,14 @@
-// Dr. Mario 64 Password Encoder/Decoder Tool
+// Dr. Mario 64 Password Generator/Decoder Tool
 // Copyright (C) 2020 WaluigiBSOD (waluigibsod.github.io)
 //
-// This file is part of Dr. Mario 64 Password Encoder/Decoder Tool.
+// This file is part of Dr. Mario 64 Password Generator/Decoder Tool.
 //
-// Dr. Mario 64 Password Encoder/Decoder Tool is free software: you can redistribute it and/or modify
+// Dr. Mario 64 Password Generator/Decoder Tool is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Dr. Mario 64 Password Encoder/Decoder Tool is distributed in the hope that it will be useful,
+// Dr. Mario 64 Password Generator/Decoder Tool is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
@@ -38,7 +38,7 @@
 //
 // Result: a 20-character password encoding all this information (e.g. 2TL8A8WYDP5M5J80BT0P from https://tcrf.net/File:DrMario64-password.png).
 
-string _EncodePassword(unsigned char GameMode, unsigned char Level, unsigned char Speed, unsigned int Score, unsigned short Time, unsigned char Name[], unsigned int FrameCount) {
+string _GeneratePassword(unsigned char GameMode, unsigned char Level, unsigned char Speed, unsigned int Score, unsigned short Time, unsigned char Name[], unsigned int FrameCount) {
     string IntermediatePassword[3] = {"","",""};
     string retPASSWORD = "";
 

@@ -1,14 +1,14 @@
-// Dr. Mario 64 Password Encoder/Decoder Tool
+// Dr. Mario 64 Password Generator/Decoder Tool
 // Copyright (C) 2020 WaluigiBSOD (waluigibsod.github.io)
 //
-// This file is part of Dr. Mario 64 Password Encoder/Decoder Tool.
+// This file is part of Dr. Mario 64 Password Generator/Decoder Tool.
 //
-// Dr. Mario 64 Password Encoder/Decoder Tool is free software: you can redistribute it and/or modify
+// Dr. Mario 64 Password Generator/Decoder Tool is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Dr. Mario 64 Password Encoder/Decoder Tool is distributed in the hope that it will be useful,
+// Dr. Mario 64 Password Generator/Decoder Tool is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
@@ -21,7 +21,7 @@
 using namespace std;
 
 #include "Constants.h"
-#include "PasswordDecodeEncode.h"
+#include "PasswordGenerateDecode.h"
 #include "PasswordCheck.h"
 #include "PasswordShow.h"
 #include "PlayerName.h"
@@ -121,7 +121,7 @@ int main(int argc, char** argv) {
                     if (SecondArgumentsCheck != PasswordOK)
                         return SecondArgumentsCheck;
                     else {
-                        string Password = _EncodePassword(GameMode,Level,Speed,Score,Time,Name,FrameCount);
+                        string Password = _GeneratePassword(GameMode,Level,Speed,Score,Time,Name,FrameCount);
                         return _ShowDecodedPassword(Password);
                     }
 
@@ -164,7 +164,7 @@ int main(int argc, char** argv) {
                     if (SecondArgumentsCheck != PasswordOK)
                         return SecondArgumentsCheck;
                     else {
-                        string Password = _EncodePassword(GameMode,Level,Speed,Score,Time,Name,FrameCount);
+                        string Password = _GeneratePassword(GameMode,Level,Speed,Score,Time,Name,FrameCount);
                         return _ShowDecodedPassword(Password);
                     }
 
