@@ -8,7 +8,7 @@ Both this program and [Dr. Mario 64 Password Decoder](https://github.com/Waluigi
 
 The original implementation of the password generation algorithm inside the source code of the game can be found at `bbgames.7z\bbgames.tar\d1\routefree\bbgames\depot\dm64\src\passwd.c`, for some reason the password decoding algorithm is absent but it can be easily obtained from the generation one.
 
-Code documentation can be found [here](https://waluigibsod.github.io/dm64-password-decoder), generated with [Doxygen](https://github.com/doxygen/doxygen) from the source code and an additional file for the main page.
+Code documentation can be found [here](https://waluigibsod.github.io/dm64-password-tool), generated with [Doxygen](https://github.com/doxygen/doxygen) from the source code and an additional file for the main page.
 
 ### How To Compile It
 
