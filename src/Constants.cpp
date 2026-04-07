@@ -1,14 +1,14 @@
-// Dr. Mario 64 Password Generator/Decoder Tool
+// Dr. Mario 64 Password Tool
 // Copyright (C) 2020-present WaluigiBSOD (waluigibsod.github.io)
 //
-// This file is part of Dr. Mario 64 Password Generator/Decoder Tool.
+// This file is part of Dr. Mario 64 Password Tool.
 //
-// Dr. Mario 64 Password Generator/Decoder Tool is free software: you can redistribute it and/or modify
+// Dr. Mario 64 Password Tool is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Dr. Mario 64 Password Generator/Decoder Tool is distributed in the hope that it will be useful,
+// Dr. Mario 64 Password Tool is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
@@ -16,86 +16,107 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
+/// @file      Constants.cpp
+///
+/// @brief     Constants file. All the program's constant are defined in this file.
+///
+/// @author    WaluigiBSOD
+/// @copyright GPL-3.0 License
+
 #include <string>
 
 using namespace std;
 
-extern const string ProgramVersion =                                        "1.0 Beta";
-
-extern const unsigned int AutotestIterations =                              1 << 2; // 1 << 31 for very very very very very extensive testing.
+extern const string ProgramVersion =                                        "1.0";
 
 extern const unsigned char StringCenterLeftSpacing =                        1;
 extern const unsigned char StringCenterWidth =                              64;
+
+// Game Mode
 
 extern const unsigned char GameModeClassic =                                0;
 extern const unsigned char GameModeScoreAttack =                            1;
 extern const unsigned char GameModeMarathon =                               2;
 
+extern const unsigned char GameModes[3] =                                   {
+    GameModeClassic,
+    GameModeScoreAttack,
+    GameModeMarathon
+};
+
+// Game Level
+
 extern const unsigned char GameLevelEasy =                                  0;
 extern const unsigned char GameLevelNormal =                                1;
 extern const unsigned char GameLevelHard =                                  2;
+
+extern const unsigned char GameLevel[3] =                                   {
+    GameLevelEasy,
+    GameLevelNormal,
+    GameLevelHard
+};
+
+// Virus Level
+
+extern const unsigned char VirusLevelMaximum =                              24;
+
+// Speed
 
 extern const unsigned char SpeedLow =                                       0;
 extern const unsigned char SpeedMedium =                                    1;
 extern const unsigned char SpeedHigh =                                      2;
 
-extern const unsigned char VirusLevelMinimum =                              0;
-extern const unsigned char VirusLevelMaximum =                              24;
+extern const unsigned char GameSpeed[3] =                                   {
+    SpeedLow,
+    SpeedMedium,
+    SpeedHigh
+};
 
-extern const unsigned int ScoreMinimum =                                    0;
+// Score
+
 extern const unsigned int ScoreMaximum =                                    999999;
 
-extern const unsigned short TimeMinimum =                                   0;
+// Time
+
 extern const unsigned short TimeMaximum =                                   59999;
 
-extern const unsigned int FrameCountMinimum =                               0;
+// Frame Count (modulo 1024)
+
 extern const unsigned int FrameCountMaximum =                               1023;
+
+// Password
+
+extern const string PasswordCharacters =                                    "ABCDEFGHJKLMNPQRSTVWXY1234567890";
+
+extern const unsigned char PasswordLength =                                 20;
+
+// Password (error codes)
 
 extern const unsigned char PasswordOK =                                     0;
 extern const unsigned char PasswordInvalidLength =                          1;
 extern const unsigned char PasswordInvalidCharacters =                      2;
-extern const unsigned char PasswordDecodeError =                            3;
-extern const unsigned char PasswordInvalidGameMode =                        4;
+extern const unsigned char PasswordInvalidChecksum =                        3;
+extern const unsigned char PasswordInvalidClassicLevel =                    4;
 extern const unsigned char PasswordInvalidNonClassicLevel =                 5;
-extern const unsigned char PasswordInvalidLevel =                           6;
-extern const unsigned char PasswordInvalidSpeed =                           7;
-extern const unsigned char PasswordInvalidScore =                           8;
-extern const unsigned char PasswordInvalidTime =                            9;
-extern const unsigned char PasswordInvalidName =                            10;
-extern const unsigned char PasswordInvalidFrameCount =                      11;
+extern const unsigned char PasswordInvalidScore =                           6;
+extern const unsigned char PasswordInvalidTime =                            7;
+extern const unsigned char PasswordInvalidPlayerName =                      8;
 
-extern const unsigned int ArgumentInvalidPasswordLength =                   12;
-extern const unsigned int ArgumentInvalidGameMode =                         13;
-extern const unsigned int ArgumentInvalidLevel =                            14;
-extern const unsigned int ArgumentInvalidSpeed =                            15;
-extern const unsigned int ArgumentInvalidScore =                            16;
-extern const unsigned int ArgumentInvalidTime =                             17;
-extern const unsigned int ArgumentInvalidName =                             18;
-extern const unsigned int ArgumentInvalidFrameCount =                       19;
+// Arguments (error codes)
 
-extern const unsigned int ReturnAutoTestFail =                              20;
-extern const unsigned int ReturnAutoTestPass =                              PasswordOK;
+extern const unsigned char ArgumentInvalidGameMode =                        9;
+extern const unsigned char ArgumentInvalidLevel =                           10;
+extern const unsigned char ArgumentInvalidSpeed =                           11;
+extern const unsigned char ArgumentInvalidScore =                           12;
+extern const unsigned char ArgumentInvalidTime =                            13;
+extern const unsigned char ArgumentInvalidPlayerName =                      14;
+extern const unsigned char ArgumentInvalidFrameCount =                      15;
 
-extern const unsigned int DataTypeCharCorrectByteSize =                     1;
-extern const unsigned int DataTypeShortCorrectByteSize =                    2;
-extern const unsigned int DataTypeIntCorrectByteSize =                      4;
-extern const unsigned int DataTypeLongLongCorrectByteSize =                 8;
+// Player Name
 
-extern const unsigned int DataTypeSignedCharWrongSize =                     21;
-extern const unsigned int DataTypeUnsignedCharWrongSize =                   22;
-extern const unsigned int DataTypeSignedShortWrongSize =                    23;
-extern const unsigned int DataTypeUnsignedShortWrongSize =                  24;
-extern const unsigned int DataTypeSignedIntWrongSize =                      25;
-extern const unsigned int DataTypeUnsignedIntWrongSize =                    26;
-extern const unsigned int DataTypeSignedLongLongWrongSize =                 27;
-extern const unsigned int DataTypeUnsignedLongLongWrongSize =               28;
+extern const string AlphabeticNumericASCII =                                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-extern const string AlphabeticUppercaseASCII =                              "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-extern const string AlphabeticLowercaseASCII =                              "abcdefghijklmnopqrstuvwxyz";
-extern const string NumericASCII =                                          "0123456789";
-
-extern const string AlphabeticNumericASCII =                                AlphabeticUppercaseASCII + AlphabeticLowercaseASCII + NumericASCII;
-
+extern const unsigned char SpecialCharacterSpace =                          '_';
 extern const unsigned char SpecialCharacterTilde =                          '~';
 extern const unsigned char SpecialCharacterSlashSmall =                     '/';
 extern const unsigned char SpecialCharacterCenteredDot =                    '$';
@@ -109,10 +130,11 @@ extern const unsigned char SpecialCharacterSlashBig =                       '\\'
 extern const unsigned char SpecialCharacterColon =                          ':';
 extern const unsigned char SpecialCharacterPercentual =                     '%';
 extern const unsigned char SpecialCharacterAccent =                         '\'';
-extern const unsigned char SpecialCharacterAmperstand =                     '&';
-extern const unsigned char SpecialCharacterDotAlternative =                 ',';
+extern const unsigned char SpecialCharacterAmpersand =                      '!';
+extern const unsigned char SpecialCharacterDotAlternate =                   ',';
 
-extern const char SpecialASCII[] = {
+extern const char SpecialToASCIICharactersTable[16] = {
+    SpecialCharacterSpace,
     SpecialCharacterTilde,
     SpecialCharacterSlashSmall,
     SpecialCharacterCenteredDot,
@@ -126,11 +148,11 @@ extern const char SpecialASCII[] = {
     SpecialCharacterColon,
     SpecialCharacterPercentual,
     SpecialCharacterAccent,
-    SpecialCharacterAmperstand,
-    SpecialCharacterDotAlternative
+    SpecialCharacterAmpersand,
+    SpecialCharacterDotAlternate
 };
 
-extern const unsigned char InternalToASCIICharacterTable[] = {
+extern const unsigned char InternalToASCIICharactersTable[78] = {
     0,          // (Space)
 
     163,        // A
@@ -210,35 +232,30 @@ extern const unsigned char InternalToASCIICharacterTable[] = {
     237,        // %
     238,        // ´
     242,        // &
-    243,        // . (copy)
+    243         // . (copy)
 };
 
-extern const unsigned int ConversionInternalToAsciiError =                  0;
-extern const unsigned char ConversionAsciiToInternalError =                 ' ';
+extern const unsigned char ConversionInternalToAsciiError =                 0xFF;
+extern const unsigned char ConversionAsciiToInternalError =                 '=';
 extern const string ConversionInternalToConversationalError =               "";
 
-extern const unsigned int InternalCharacterTableSize =                      sizeof(InternalToASCIICharacterTable) / sizeof(unsigned char);
-extern const unsigned int SpecialASCIISize =                                sizeof(SpecialASCII) / sizeof(unsigned char);
+// XOR masks for the three chunks of binary data, chosen by the last two bits of the checksum.
 
-extern const string PasswordCharacters =                                    "ABCDEFGHJKLMNPQRSTVWXY1234567890";
-
-// XOR masks for the three chunks of binary data (high, middle and lower chunk), chosen by the last two bits of the checksum.
-
-extern const unsigned int TableMaskHigh[4] = {
+extern const unsigned int TableMaskPasswordChunkX[4] = {
     0x0B626835,
     0x0763337A,
     0x0F4D6F49,
     0x06343069
 };
 
-extern const unsigned int TableMaskMiddle[4] = {
+extern const unsigned int TableMaskPasswordChunkY[4] = {
     0x03DF4B61,
     0x040E7254,
     0x0A456B4F,
     0x092E476F
 };
 
-extern const unsigned int TableMaskLower[4] = {
+extern const unsigned int TableMaskPasswordChunkZ[4] = {
     0x08C26B8A,
     0x0D73B9A1,
     0x053AD652,
@@ -246,9 +263,10 @@ extern const unsigned int TableMaskLower[4] = {
 };
 
 // XOR masks for additional entropy of the password, depending on the number of frames passed since startup (modulo 1024) when the password was generated.
+//
 // Two values from these tables are XORed together to make a constant.
 
-extern const unsigned int TableMaskFrameCountLower[32] = {
+extern const unsigned int TableMaskFrameCountX[32] = {
     0x81021794,
     0xF4967A99,
     0xB403DEC6,
@@ -283,7 +301,7 @@ extern const unsigned int TableMaskFrameCountLower[32] = {
     0x62C46329
 };
 
-extern const unsigned int TableMaskFrameCountUpper[32] = {
+extern const unsigned int TableMaskFrameCountY[32] = {
     0xE435FBDF,
     0xE2384C76,
     0xD702AE2A,
@@ -317,7 +335,3 @@ extern const unsigned int TableMaskFrameCountUpper[32] = {
     0xCE95D9FD,
     0x61F91740
 };
-
-extern const unsigned char GameModes[3] =                                   {GameModeClassic,GameModeScoreAttack,GameModeMarathon};
-extern const unsigned char GameLevel[3] =                                   {GameLevelEasy,GameLevelNormal,GameLevelHard};
-extern const unsigned char GameSpeed[3] =                                   {SpeedLow,SpeedMedium,SpeedHigh};

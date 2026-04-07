@@ -1,14 +1,14 @@
-// Dr. Mario 64 Password Generator/Decoder Tool
+// Dr. Mario 64 Password Tool
 // Copyright (C) 2020-present WaluigiBSOD (waluigibsod.github.io)
 //
-// This file is part of Dr. Mario 64 Password Generator/Decoder Tool.
+// This file is part of Dr. Mario 64 Password Tool.
 //
-// Dr. Mario 64 Password Generator/Decoder Tool is free software: you can redistribute it and/or modify
+// Dr. Mario 64 Password Tool is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Dr. Mario 64 Password Generator/Decoder Tool is distributed in the hope that it will be useful,
+// Dr. Mario 64 Password Tool is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
@@ -16,13 +16,24 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
+/// @file      StringFunctions.h
+///
+/// @brief     StringFunctions.cpp's header file.
+///
+/// @author    WaluigiBSOD
+/// @copyright GPL-3.0 License
+
 #pragma once
 
 #include <string>
 
+#include "Constants.h"
+
 using namespace std;
 
-extern const unsigned char StringCenterLeftSpacing;
-extern const unsigned char StringCenterWidth;
+string _GetExecutableName(char* ExecutableFullPath);
 
 string _CenterString(string ToCenter = "", bool PrintBorder = true, unsigned int SpacingLeft = StringCenterLeftSpacing, unsigned int Width = StringCenterWidth);
+
+bool _OnlyDigits(char* String, unsigned int OffsetStart, unsigned int OffsetEnd);
+bool _OnlyDigits(char* String);
