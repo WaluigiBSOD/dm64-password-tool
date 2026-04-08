@@ -27,7 +27,7 @@
 
 using namespace std;
 
-extern const string ProgramVersion =                                        "1.0";
+extern const string ProgramVersion =                                        "1.1";
 
 extern const unsigned char StringCenterLeftSpacing =                        1;
 extern const unsigned char StringCenterWidth =                              64;
