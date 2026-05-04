@@ -163,6 +163,11 @@ bool _ValidateCommandLineTime(char* CommandLineArgument, bool InGameInformation)
     if (InGameInformation && CommandLineArgument[2] != ':')
         return false;
 
+    // Seconds (only when inputting in-game information)
+
+    if (InGameInformation && CommandLineArgument[3] > '5')
+        return false;
+
     return true;
 }
 
